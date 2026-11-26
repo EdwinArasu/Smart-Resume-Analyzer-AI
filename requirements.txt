@@ -1,0 +1,1 @@
+Flask>=3.0\npypdf>=4.0\npython-docx>=1.1\n
