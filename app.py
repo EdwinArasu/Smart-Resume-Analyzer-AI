@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from pypdf import PdfReader
 from docx import Document
 app=Flask(__name__); app.secret_key=os.environ.get("SECRET_KEY","change-me")
-os.makedirs("uploads",exist_ok=True); DB="resume_analyzer.db"
+os.makedirs("/tmp/uploads",exist_ok=True); DB="/tmp/resume_analyzer.db"
 ROLES={
 "Data Analyst":["python","sql","excel","power bi","tableau","statistics","pandas","data visualization","communication"],
 "Web Developer":["html","css","javascript","react","git","responsive design","api","testing"],
@@ -44,7 +44,7 @@ def index():
   if not f or not f.filename:flash("Choose a file.");return redirect(url_for("index"))
   fn=secure_filename(f.filename); ext=fn.rsplit(".",1)[-1].lower()
   if ext not in ["pdf","docx"]:flash("Upload PDF or DOCX.");return redirect(url_for("index"))
-  path=os.path.join("uploads",fn);f.save(path)
+  path=os.path.join("/tmp/uploads",fn);f.save(path)
   try:text=extract(path,ext)
   except Exception:flash("Could not parse file.");return redirect(url_for("index"))
   if not text.strip():flash("No text found. Scanned PDFs may require OCR.");return redirect(url_for("index"))
