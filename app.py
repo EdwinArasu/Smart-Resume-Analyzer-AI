@@ -4,7 +4,7 @@ from flask import Flask,render_template,request,flash,redirect,url_for
 from werkzeug.utils import secure_filename
 from pypdf import PdfReader
 from docx import Document
-app=Flask(__name__); app.secret_key=os.environ.get("SECRET_KEY","change-me")
+app=Flask(__name__,template_folder=".",static_folder=".",static_url_path="/static"); app.secret_key=os.environ.get("SECRET_KEY","change-me")
 os.makedirs("/tmp/uploads",exist_ok=True); DB="/tmp/resume_analyzer.db"
 ROLES={
 "Data Analyst":["python","sql","excel","power bi","tableau","statistics","pandas","data visualization","communication"],
